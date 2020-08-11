@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Rocky</string>
+    <string name="text_titulo">Rocky dog</string>
+    <string name="btn_myclick">Click</string>
 </resources>
