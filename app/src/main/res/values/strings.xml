@@ -2,4 +2,24 @@
     <string name="app_name">Rocky</string>
     <string name="text_titulo">Rocky dog</string>
     <string name="btn_myclick">Click</string>
+    <string name="submit">Enviar</string>
+    <string name="mensaje">Diste click en el boton flotante</string>
+    <string name="text_accion">Accion</string>
+    <string-array name="planetas">
+        <item>Mercurio</item>
+        <item>Venus</item>
+        <item>Tierra</item>
+        <item>Marte</item>
+        <item>Jupiter</item>
+    </string-array>
+    <string name="titulo_tarjeta">Android 30.0</string>
+    <string name="descripcion_tarjeta">Esta es la version donde si incluye material design</string>
+    <string name="oncreate">oncreate</string>
+    <string name="onstart">onStart</string>
+    <string name="onresume">onresume</string>
+    <string name="onrestart">onrestart</string>
+    <string name="onpause">onpause</string>
+    <string name="onstop">onstop</string>
+    <string name="ondestroy">ondestroy</string>
+    <string name="editText">bienvenido</string>
 </resources>
