@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         String message =getResources().getString(R.string.editText);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-
+        finish();
     }
 
     @Override

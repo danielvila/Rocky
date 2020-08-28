@@ -22,4 +22,10 @@
     <string name="onstop">onstop</string>
     <string name="ondestroy">ondestroy</string>
     <string name="editText">bienvenido</string>
+    <string name="nombre">Daniel Santos</string>
+    <string name="telefono">6695-3846</string>
+    <string name="email">danielsantos@gmail.com</string>
+    <string name="pnombre">nombre</string>
+    <string name="ptelefono">telefono</string>
+    <string name="pemail">email</string>
 </resources>

@@ -6,4 +6,10 @@
     <dimen name="card_medida">200dp</dimen>
     <dimen name="card_height">300dp</dimen>
     <dimen name="card_titulo">20dp</dimen>
+    <dimen name="nombre_contacto">33dp</dimen>
+    <dimen name="telefono_contacto">20dp</dimen>
+    <dimen name="top">20dp</dimen>
+    <dimen name="left">10dp</dimen>
+    <dimen name="corner_radius_cardview">4dp</dimen>
+    <dimen name="nombre_cardview">20dp</dimen>
 </resources>
