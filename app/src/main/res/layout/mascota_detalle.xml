@@ -8,6 +8,7 @@
     tools:context="com.dalda.rocky.DetalleMascota">
 
     <LinearLayout
+        android:id="@+id/lldetalles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
@@ -83,4 +84,25 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/lldetalles"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@android:color/transparent"
+        app:barrierAllowsGoneWidgets="false"
+        app:barrierDirection="bottom"
+        app:layout_constraintBottom_toTopOf="@+id/lldetalles"
+        app:layout_constraintEnd_toStartOf="@+id/lldetalles"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_editor_absoluteX="@android:dimen/app_icon_size"
+        app:layout_editor_absoluteY="@android:dimen/app_icon_size"
+        app:rippleColor="@android:color/transparent"
+        app:srcCompat="@drawable/icons8_star_48" />
 </androidx.constraintlayout.widget.ConstraintLayout>

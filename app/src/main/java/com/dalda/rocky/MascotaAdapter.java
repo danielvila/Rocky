@@ -37,6 +37,7 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MascotaV
         final Mascota mascotao = mascotas.get(position);
         holder.imgFoto.setImageResource(mascotao.getFoto());
         holder.tvNombreCV.setText(mascotao.getNombre());
+        holder.tvRating.setText(mascotao.getRating() + "");
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

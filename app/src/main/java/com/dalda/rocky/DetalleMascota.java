@@ -14,6 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 public class DetalleMascota extends AppCompatActivity {
     TextView tvNombre;
     TextView tvTelefono;
@@ -23,6 +26,9 @@ public class DetalleMascota extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.mascota_detalle);
+
+        agregarFAB();
+
        /* Toast.makeText(this, "estamos comenzando esta vista", Toast.LENGTH_LONG).show();
 
         Intent intent = getIntent();
@@ -66,5 +72,14 @@ public class DetalleMascota extends AppCompatActivity {
         emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
         emailIntent.setType("message/rfc822");
         startActivity(Intent.createChooser(emailIntent, "Email "));
+    }
+    public void agregarFAB(){
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(findViewById(android.R.id.content),"diste click al boton flotante",Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 }

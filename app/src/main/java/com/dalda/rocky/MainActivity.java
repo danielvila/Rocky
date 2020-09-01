@@ -9,6 +9,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -39,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
         setSupportActionBar(miActionBar);
 
-        agregarFAB();
-
         listamascotas = (RecyclerView) findViewById(R.id.rvMascotas);
         LinearLayoutManager llmmascotas = new LinearLayoutManager(this);
         llmmascotas.setOrientation(LinearLayoutManager.VERTICAL);
@@ -68,28 +68,32 @@ public class MainActivity extends AppCompatActivity {
     }
     public void iniciarListaMascotas(){
         mascotas = new ArrayList<Mascota>();
-        mascotas.add(new Mascota("Zepellin", 0, R.drawable.mascota1));
-        mascotas.add(new Mascota("Lucifer", 0, R.drawable.mascota2));
-        mascotas.add(new Mascota("Rocky", 0, R.drawable.mascota3));
-        mascotas.add(new Mascota("Yeico", 0, R.drawable.mascota4));
-        mascotas.add(new Mascota("Duran", 0, R.drawable.mascota5));
+        mascotas.add(new Mascota("Zepellin", 2, R.drawable.mascota1));
+        mascotas.add(new Mascota("Lucifer", 4, R.drawable.mascota2));
+        mascotas.add(new Mascota("Rocky", 5, R.drawable.mascota3));
+        mascotas.add(new Mascota("Yeico", 1, R.drawable.mascota4));
+        mascotas.add(new Mascota("Duran", 3, R.drawable.mascota5));
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = new Intent(MainActivity.this, ListaFavoritos.class);
+        intent.putExtra("mymascotas", mascotas);
+        startActivity(intent);
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
     public void refrescandoContenido(){
         String[] planetas = getResources().getStringArray(R.array.planetas);
         lstMilista.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, planetas));
         sfiMiIndicadorRefresh.setRefreshing(false);
     }
 
-    public void agregarFAB(){
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            Intent intent = new Intent(MainActivity.this, ListaFavoritos.class);
-            intent.putExtra("mymascotas", mascotas);
-            startActivity(intent);
-            finish();
-            }
-        });
-    }
 }
