@@ -23,6 +23,8 @@ public class ListadoMascotas extends AppCompatActivity {
     public static final String EXTRA_NOMBRE = "";
     ArrayList<Contacto> contactos;
     private RecyclerView listaContactos;
+    public ContactoAdaptador adaptador;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,12 @@ public class ListadoMascotas extends AppCompatActivity {
         setContentView(R.layout.listado_mascotas);
         /*Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
         setSupportActionBar(miActionBar);*/
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listaContactos = (RecyclerView) findViewById(R.id.rvContactos);
-        /*LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);*/
-        GridLayoutManager llm = new GridLayoutManager(this, 2);
-
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+      /*  GridLayoutManager glm = new GridLayoutManager(this, 2);*/
 
         listaContactos.setLayoutManager(llm);
         inicializarListaContactos();
@@ -63,16 +65,9 @@ public class ListadoMascotas extends AppCompatActivity {
             }
         });*/
 
-        // Get the Intent that started this activity and extract the string
-        Intent intents = getIntent();
-        String message = intents.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(message);
     }
     public void inicializarAdaptador(){
-        ContactoAdaptador adaptador = new ContactoAdaptador(contactos);
+        adaptador = new ContactoAdaptador(contactos, this);
         listaContactos.setAdapter(adaptador);
     }
     public void inicializarListaContactos(){

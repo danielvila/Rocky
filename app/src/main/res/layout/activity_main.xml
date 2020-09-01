@@ -11,92 +11,65 @@
     tools:context=".MainActivity"
     android:background="@color/colorFondo">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/llmain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/sfiMiIndicadorRefresh"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/miActionBar"
+            layout="@layout/actionbar"
+            ></include>
+
+        <TextView
+            android:id="@+id/tvTituloFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lista de Mascotas"
+            android:textSize="@dimen/card_titulo"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMascotas"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
-            <ListView android:id="@+id/lstMilista"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/miActionBar">
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/sfiMiIndicadorRefresh"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
-            </ListView>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_titulo"
-            android:layout_below="@+id/sfiMiIndicadorRefresh"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.191" />
-
-        <Button
-            android:id="@+id/btnMiBoton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitulo"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:text="@string/btn_myclick"
-            android:theme="@style/MiBotonRaised"
-            android:onClick="cambiarvista"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnMiBoton"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:barrierAllowsGoneWidgets="false"
-            app:barrierDirection="bottom"
-            app:layout_editor_absoluteX="@android:dimen/app_icon_size"
-            app:layout_editor_absoluteY="@android:dimen/app_icon_size"
-            app:srcCompat="@android:drawable/btn_star"
-            tools:layout_editor_absoluteX="326dp"
-            tools:layout_editor_absoluteY="647dp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/card_medida"
-            android:layout_height="@dimen/card_height"
-            android:layout_below="@+id/fab"
-            card_view:cardCornerRadius="4dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/imgImagen"
+                <ListView android:id="@+id/lstMilista"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/rocky"
-                    android:scaleType="centerCrop"
-                    />
-                <TextView
-                    android:id="@+id/tvTituloimagen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/titulo_tarjeta"
-                    android:layout_below="@+id/imgImagen"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/card_titulo"
-                   />
-                <TextView
-                    android:id="@+id/tvDescripcionTarjeta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/descripcion_tarjeta"
-                    android:layout_below="@+id/tvTituloimagen"
-                    />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                    android:layout_height="200dp">
+                </ListView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llmain"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@android:color/transparent"
+        app:barrierAllowsGoneWidgets="false"
+        app:barrierDirection="bottom"
+        app:layout_editor_absoluteX="@android:dimen/app_icon_size"
+        app:layout_editor_absoluteY="@android:dimen/app_icon_size"
+        app:rippleColor="@android:color/transparent"
+        app:srcCompat="@drawable/icons8_star_48"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

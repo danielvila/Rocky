@@ -28,4 +28,5 @@
     <string name="pnombre">nombre</string>
     <string name="ptelefono">telefono</string>
     <string name="pemail">email</string>
+    <string name="text_rating">0</string>
 </resources>

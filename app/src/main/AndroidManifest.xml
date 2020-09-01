@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dalda.rocky">
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,18 +11,24 @@
         android:roundIcon="@mipmap/rocky"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListadoMascotas" android:parentActivityName=".MainActivity">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ListaFavoritos" android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".ListadoMascotas">
         </activity>
-        <activity android:name=".DetalleMascota" android:parentActivityName=".ListadoMascotas">
+        <activity
+            android:name=".DetalleMascota"
+            android:parentActivityName=".ListadoMascotas">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListadoMascotas" />

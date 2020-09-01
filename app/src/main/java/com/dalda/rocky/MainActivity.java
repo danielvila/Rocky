@@ -1,6 +1,9 @@
 package com.dalda.rocky;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
@@ -16,22 +19,40 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "";
     SwipeRefreshLayout sfiMiIndicadorRefresh;
     ListView lstMilista;
-    Adapter adaptador;
+
+    ArrayList<Mascota> mascotas;
+    private RecyclerView listamascotas;
+    public MascotaAdapter adaptadormascota;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
+        setSupportActionBar(miActionBar);
+
         agregarFAB();
-        sfiMiIndicadorRefresh = (SwipeRefreshLayout) findViewById(R.id.sfiMiIndicadorRefresh);
+
+        listamascotas = (RecyclerView) findViewById(R.id.rvMascotas);
+        LinearLayoutManager llmmascotas = new LinearLayoutManager(this);
+        llmmascotas.setOrientation(LinearLayoutManager.VERTICAL);
+        listamascotas.setLayoutManager(llmmascotas);
+        iniciarListaMascotas();
+        iniciarAdaptador();
+
         lstMilista = (ListView) findViewById(R.id.lstMilista);
         String[] planetas = getResources().getStringArray(R.array.planetas);
         lstMilista.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, planetas));
+
+        sfiMiIndicadorRefresh = (SwipeRefreshLayout) findViewById(R.id.sfiMiIndicadorRefresh);
         sfiMiIndicadorRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -40,50 +61,19 @@ public class MainActivity extends AppCompatActivity {
         });
         Toast.makeText(this, getResources().getString(R.string.oncreate), Toast.LENGTH_LONG).show();
     }
-    public void cambiarvista(View view){
-        Intent intent = new Intent(this, ListadoMascotas.class);
-        String message =getResources().getString(R.string.editText);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-        finish();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Toast.makeText(this, getResources().getString(R.string.onstart), Toast.LENGTH_LONG).show();
+    public void iniciarAdaptador(){
+        adaptadormascota = new MascotaAdapter(mascotas, this);
+        listamascotas.setAdapter(adaptadormascota);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, getResources().getString(R.string.onresume), Toast.LENGTH_LONG).show();
+    public void iniciarListaMascotas(){
+        mascotas = new ArrayList<Mascota>();
+        mascotas.add(new Mascota("Zepellin", 0, R.drawable.mascota1));
+        mascotas.add(new Mascota("Lucifer", 0, R.drawable.mascota2));
+        mascotas.add(new Mascota("Rocky", 0, R.drawable.mascota3));
+        mascotas.add(new Mascota("Yeico", 0, R.drawable.mascota4));
+        mascotas.add(new Mascota("Duran", 0, R.drawable.mascota5));
     }
-    // actividad corriendo
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Toast.makeText(this, getResources().getString(R.string.onrestart), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(this, getResources().getString(R.string.onpause), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Toast.makeText(this, getResources().getString(R.string.onstop), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(this, getResources().getString(R.string.ondestroy), Toast.LENGTH_LONG).show();
-    }
-
     public void refrescandoContenido(){
         String[] planetas = getResources().getStringArray(R.array.planetas);
         lstMilista.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, planetas));
@@ -95,15 +85,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, getResources().getString(R.string.mensaje), Snackbar.LENGTH_LONG)
-                        .setAction(getResources().getString(R.string.text_accion), new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Log.i("SNACKBAR", "CLICK en snackbar");
-                            }
-                        })
-                        .setActionTextColor(getResources().getColor(R.color.colorPrimary))
-                        .show();
+            Intent intent = new Intent(MainActivity.this, ListaFavoritos.class);
+            intent.putExtra("mymascotas", mascotas);
+            startActivity(intent);
+            finish();
             }
         });
     }

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -17,30 +18,31 @@ public class DetalleMascota extends AppCompatActivity {
     TextView tvNombre;
     TextView tvTelefono;
     TextView tvEmail;
+    public Contacto contact;
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.mascota_detalle);
-        Log.i("myvista: ", "estamos comenzando esta vista");
-        Bundle parametros = getIntent().getExtras();
-        String nombre   = parametros.getString(getResources().getString(R.string.pnombre));
-        String telefono = parametros.getString(getResources().getString(R.string.ptelefono));
-        String email    = parametros.getString(getResources().getString(R.string.pemail));
+       /* Toast.makeText(this, "estamos comenzando esta vista", Toast.LENGTH_LONG).show();
 
-        tvNombre   = findViewById(R.id.tvNombre);
+        Intent intent = getIntent();
+        contact = (Contacto)intent.getSerializableExtra("mycontact");
+
+        String nombre   = contact.getNombre();
+        String telefono = contact.getTelefono();
+        String email    = contact.getEmail();
+        Toast.makeText(this, email + " aqui con el email", Toast.LENGTH_LONG).show();*/
+       /* tvNombre   = findViewById(R.id.tvNombre);
         tvTelefono = findViewById(R.id.tvTelefono);
         tvEmail    = findViewById(R.id.tvEmail);
 
         tvNombre.setText(nombre);
         tvTelefono.setText(telefono);
-        tvEmail.setText(email);
+        tvEmail.setText(email);*/
+/*
         Log.i("Nombre: ", nombre);
         Log.i("Telefono: ", telefono);
-        Log.i("Email: ", email);
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(ListadoMascotas.EXTRA_NOMBRE);
-        TextView mynombre = findViewById(R.id.mynombre);
-        mynombre.setText(message);
+        Log.i("Email: ", email);*/
     }
 
     @Override
