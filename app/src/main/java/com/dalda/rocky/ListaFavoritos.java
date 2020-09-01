@@ -24,6 +24,7 @@ public class ListaFavoritos extends AppCompatActivity {
         Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
         setSupportActionBar(miActionBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listafavoritos = (RecyclerView) findViewById(R.id.rvMascotasfav);
         LinearLayoutManager llmfavoritos = new LinearLayoutManager(this);

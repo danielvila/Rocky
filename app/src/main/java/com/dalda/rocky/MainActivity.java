@@ -83,10 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, ListaFavoritos.class);
-        intent.putExtra("mymascotas", mascotas);
-        startActivity(intent);
-        finish();
+        switch (item.getItemId()){
+            case R.id.mFavorito:
+                Intent intent = new Intent(MainActivity.this, ListaFavoritos.class);
+                intent.putExtra("mymascotas", mascotas);
+                startActivity(intent);
+                finish();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 

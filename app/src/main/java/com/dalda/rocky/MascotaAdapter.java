@@ -42,8 +42,8 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MascotaV
             @Override
             public void onClick(View view) {
                 int rating = mascotao.getRating();
-                mascotao.setRating( rating + 1);
-                holder.tvRating.setText(mascotao.getRating() + "");
+                mascotao.setRating( ++rating);
+                holder.tvRating.setText(String.valueOf(rating));
                 Toast.makeText(activity, "Diste like a " + mascotao.getNombre() + "Rating: " + mascotao.getRating(), Toast.LENGTH_SHORT).show();
             }
         });
