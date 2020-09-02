@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -88,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ListaFavoritos.class);
                 intent.putExtra("mymascotas", mascotas);
                 startActivity(intent);
+                finish();
+                break;
+            case R.id.mContacto:
+                Intent intentc = new Intent(MainActivity.this, ListadoMascotas.class);
+                startActivity(intentc);
                 finish();
                 break;
         }

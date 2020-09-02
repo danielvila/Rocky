@@ -29,4 +29,6 @@
     <string name="ptelefono">telefono</string>
     <string name="pemail">email</string>
     <string name="text_rating">0</string>
+    <string name="menu_favorito">Mascotas favoritas</string>
+    <string name="menu_contacto">Lista de contactos</string>
 </resources>
