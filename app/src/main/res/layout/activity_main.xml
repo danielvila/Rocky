@@ -27,12 +27,19 @@
             ></include>
 
         <TextView
-            android:id="@+id/tvTituloFavoritos"
+            android:id="@+id/tvTituloMascotas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lista de Mascotas"
+            android:text="@string/text_titulomascotas"
             android:textSize="@dimen/card_titulo"
             />
+        <ImageView
+            android:id="@+id/imgImagen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icons8_bone_yelow_48"
+            android:onClick="levantarMenuPopup"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMascotas"
             android:layout_width="match_parent"

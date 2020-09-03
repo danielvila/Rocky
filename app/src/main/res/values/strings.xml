@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Rocky</string>
     <string name="text_titulo">Rocky dog</string>
+    <string name="text_titulomascotas">Listado de Mascotas</string>
     <string name="btn_myclick">Click</string>
     <string name="submit">Enviar</string>
     <string name="mensaje">Diste click en el boton flotante</string>
@@ -31,4 +32,8 @@
     <string name="text_rating">0</string>
     <string name="menu_favorito">Mascotas favoritas</string>
     <string name="menu_contacto">Lista de contactos</string>
+    <string name="menu_editar">Editar</string>
+    <string name="menu_eliminar">Eliminar</string>
+    <string name="menu_view">Ver imagen</string>
+    <string name="menu_view_detail">Ver detalles</string>
 </resources>

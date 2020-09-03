@@ -1,5 +1,6 @@
 package com.dalda.rocky;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,13 +10,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
         setSupportActionBar(miActionBar);
+
+        TextView tvTituloMascotas = (TextView) findViewById(R.id.tvTituloMascotas);
+        registerForContextMenu(tvTituloMascotas);
 
         listamascotas = (RecyclerView) findViewById(R.id.rvMascotas);
         LinearLayoutManager llmmascotas = new LinearLayoutManager(this);
@@ -97,6 +105,46 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.contexto, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.cmEdit:
+                Toast.makeText(this, "editando", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.cmDelete:
+                Toast.makeText(this, "borrando", Toast.LENGTH_LONG).show();
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    public void levantarMenuPopup(View v){
+        ImageView imagen = (ImageView) findViewById(R.id.imgImagen);
+        PopupMenu popupMenu = new PopupMenu(this, imagen);
+        popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.mpFavorito:
+                        Toast.makeText(getBaseContext(), "imagen", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.mpContacto:
+                        Toast.makeText(getBaseContext(), "detalle", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return true;
+            }
+        });
+        popupMenu.show();
     }
 
     public void refrescandoContenido(){
