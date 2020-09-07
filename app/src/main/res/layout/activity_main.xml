@@ -21,29 +21,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            android:id="@+id/miActionBar"
-            layout="@layout/actionbar"
-            ></include>
-
-        <TextView
-            android:id="@+id/tvTituloMascotas"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarm"
             android:layout_height="wrap_content"
-            android:text="@string/text_titulomascotas"
-            android:textSize="@dimen/card_titulo"
-            />
-        <ImageView
-            android:id="@+id/imgImagen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icons8_bone_yelow_48"
-            android:onClick="levantarMenuPopup"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMascotas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarm"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+            </androidx.appcompat.widget.Toolbar>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayoutm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </androidx.viewpager.widget.ViewPager>
 
         <RelativeLayout
             android:layout_width="match_parent"

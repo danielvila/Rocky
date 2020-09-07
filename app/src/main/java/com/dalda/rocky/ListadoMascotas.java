@@ -2,46 +2,47 @@ package com.dalda.rocky;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toolbar;
+
+import com.dalda.rocky.adapter.ContactoAdaptador;
+import com.dalda.rocky.adapter.PageAdapter;
+import com.dalda.rocky.fragment.PerfilFragment;
+import com.dalda.rocky.fragment.RecyclerViewFragment;
+import com.dalda.rocky.pojo.Contacto;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
 public class ListadoMascotas extends AppCompatActivity {
     public static final String EXTRA_NOMBRE = "";
-    ArrayList<Contacto> contactos;
-    private RecyclerView listaContactos;
-    public ContactoAdaptador adaptador;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listado_mascotas);
-        /*Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
-        setSupportActionBar(miActionBar);*/
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        listaContactos = (RecyclerView) findViewById(R.id.rvContactos);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-      /*  GridLayoutManager glm = new GridLayoutManager(this, 2);*/
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        listaContactos.setLayoutManager(llm);
-        inicializarListaContactos();
-        inicializarAdaptador();
+        setUpViewPager();
+
+        if (toolbar != null){
+            setSupportActionBar(toolbar);
+        }
 
         /*
          ArrayList<String> nombresContacto = new ArrayList<>();
@@ -66,21 +67,21 @@ public class ListadoMascotas extends AppCompatActivity {
         });*/
 
     }
-    public void inicializarAdaptador(){
-        adaptador = new ContactoAdaptador(contactos, this);
-        listaContactos.setAdapter(adaptador);
-    }
-    public void inicializarListaContactos(){
-        contactos = new ArrayList<Contacto>();
-        contactos.add(new Contacto("Juan Pimentel", "2649784", "juan@test.com", R.drawable.rayo));
-        contactos.add(new Contacto("Maria Bellido", "2644613", "maria@test.com", R.drawable.rayo));
-        contactos.add(new Contacto("Rosario Tijeras", "2641379", "rosario@test.com", R.drawable.rayo));
-        contactos.add(new Contacto("Jose Sanches", "2641478", "jose@test.com", R.drawable.rayo));
-        contactos.add(new Contacto("Nancy Icarraime", "2643698", "nancy@test.com", R.drawable.rayo));
-        contactos.add(new Contacto("Sonia Sarmiento", "2641379", "sonia@test.com", R.drawable.rayo));
 
-
+    private ArrayList<Fragment> agregarFragments(){
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new RecyclerViewFragment());
+        fragments.add(new PerfilFragment());
+        return fragments;
     }
+
+    private void setUpViewPager(){
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFragments()));
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_contacts);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_perfil);
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){

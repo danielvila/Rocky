@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import com.dalda.rocky.adapter.MascotaAdapter;
+import com.dalda.rocky.pojo.Mascota;
+
 import java.util.ArrayList;
 
 public class ListaFavoritos extends AppCompatActivity {
@@ -23,7 +26,6 @@ public class ListaFavoritos extends AppCompatActivity {
 
         Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
         setSupportActionBar(miActionBar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listafavoritos = (RecyclerView) findViewById(R.id.rvMascotasfav);
@@ -33,11 +35,23 @@ public class ListaFavoritos extends AppCompatActivity {
 
         Intent intent = getIntent();
         mascotas = (ArrayList<Mascota>) intent.getSerializableExtra("mymascotas");
+        if (mascotas == null){
+            iniciarListaMascotas();
+        }
         iniciarAdaptador();
     }
     public void iniciarAdaptador(){
         adapter = new MascotaAdapter(mascotas, this);
         listafavoritos.setAdapter(adapter);
+    }
+
+    public void iniciarListaMascotas(){
+        mascotas = new ArrayList<Mascota>();
+        mascotas.add(new Mascota("Zepellin", 2, R.drawable.mascota1));
+        mascotas.add(new Mascota("Lucifer", 4, R.drawable.mascota2));
+        mascotas.add(new Mascota("Rocky", 5, R.drawable.mascota3));
+        mascotas.add(new Mascota("Yeico", 1, R.drawable.mascota4));
+        mascotas.add(new Mascota("Duran", 3, R.drawable.mascota5));
     }
 
     @Override

@@ -3,58 +3,59 @@ package com.dalda.rocky;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.dalda.rocky.adapter.MascotaAdapter;
+import com.dalda.rocky.adapter.PageAdapter;
+import com.dalda.rocky.fragment.MacotasFragment;
+import com.dalda.rocky.fragment.MascotaFragment;
+import com.dalda.rocky.fragment.PerfilFragment;
+import com.dalda.rocky.fragment.RecyclerViewFragment;
+import com.dalda.rocky.pojo.Mascota;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout sfiMiIndicadorRefresh;
     ListView lstMilista;
-
     ArrayList<Mascota> mascotas;
-    private RecyclerView listamascotas;
-    public MascotaAdapter adaptadormascota;
+
+    private Toolbar toolbarm;
+    private TabLayout tabLayoutm;
+    private ViewPager viewPagerm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
-        setSupportActionBar(miActionBar);
+        toolbarm = (Toolbar) findViewById(R.id.toolbarm);
+        tabLayoutm = (TabLayout) findViewById(R.id.tabLayoutm);
+        viewPagerm = (ViewPager) findViewById(R.id.viewPagerm);
 
-        TextView tvTituloMascotas = (TextView) findViewById(R.id.tvTituloMascotas);
-        registerForContextMenu(tvTituloMascotas);
+        setUpViewPager();
 
-        listamascotas = (RecyclerView) findViewById(R.id.rvMascotas);
-        LinearLayoutManager llmmascotas = new LinearLayoutManager(this);
-        llmmascotas.setOrientation(LinearLayoutManager.VERTICAL);
-        listamascotas.setLayoutManager(llmmascotas);
-        iniciarListaMascotas();
-        iniciarAdaptador();
+        if (toolbarm != null){
+            setSupportActionBar(toolbarm);
+        }
 
         lstMilista = (ListView) findViewById(R.id.lstMilista);
         String[] planetas = getResources().getStringArray(R.array.planetas);
@@ -67,20 +68,21 @@ public class MainActivity extends AppCompatActivity {
                 refrescandoContenido();
             }
         });
-        Toast.makeText(this, getResources().getString(R.string.oncreate), Toast.LENGTH_LONG).show();
+
     }
 
-    public void iniciarAdaptador(){
-        adaptadormascota = new MascotaAdapter(mascotas, this);
-        listamascotas.setAdapter(adaptadormascota);
+    private ArrayList<Fragment> agregarFragments(){
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new MacotasFragment());
+        fragments.add(new MascotaFragment());
+        return fragments;
     }
-    public void iniciarListaMascotas(){
-        mascotas = new ArrayList<Mascota>();
-        mascotas.add(new Mascota("Zepellin", 2, R.drawable.mascota1));
-        mascotas.add(new Mascota("Lucifer", 4, R.drawable.mascota2));
-        mascotas.add(new Mascota("Rocky", 5, R.drawable.mascota3));
-        mascotas.add(new Mascota("Yeico", 1, R.drawable.mascota4));
-        mascotas.add(new Mascota("Duran", 3, R.drawable.mascota5));
+
+    private void setUpViewPager(){
+        viewPagerm.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFragments()));
+        tabLayoutm.setupWithViewPager(viewPagerm);
+        tabLayoutm.getTabAt(0).setIcon(R.drawable.ic_home);
+        tabLayoutm.getTabAt(1).setIcon(R.drawable.ic_dog2);
     }
 
     @Override
@@ -99,52 +101,22 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.mContacto:
-                Intent intentc = new Intent(MainActivity.this, ListadoMascotas.class);
+                Intent intentc = new Intent(MainActivity.this, ContactoActivity.class);
                 startActivity(intentc);
+                finish();
+                break;
+            case R.id.mAbout:
+                Intent intenta = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intenta);
+                finish();
+                break;
+            case R.id.mListado:
+                Intent intentl = new Intent(MainActivity.this, ListadoMascotas.class);
+                startActivity(intentl);
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.contexto, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.cmEdit:
-                Toast.makeText(this, "editando", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.cmDelete:
-                Toast.makeText(this, "borrando", Toast.LENGTH_LONG).show();
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    public void levantarMenuPopup(View v){
-        ImageView imagen = (ImageView) findViewById(R.id.imgImagen);
-        PopupMenu popupMenu = new PopupMenu(this, imagen);
-        popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.mpFavorito:
-                        Toast.makeText(getBaseContext(), "imagen", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.mpContacto:
-                        Toast.makeText(getBaseContext(), "detalle", Toast.LENGTH_LONG).show();
-                        break;
-                }
-                return true;
-            }
-        });
-        popupMenu.show();
     }
 
     public void refrescandoContenido(){

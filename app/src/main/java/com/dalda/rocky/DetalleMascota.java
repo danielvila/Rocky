@@ -1,19 +1,23 @@
 package com.dalda.rocky;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.util.Log;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import androidx.appcompat.widget.Toolbar;
 
+import com.dalda.rocky.pojo.Contacto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -26,6 +30,12 @@ public class DetalleMascota extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.mascota_detalle);
+
+        Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
+        setSupportActionBar(miActionBar);
+
+        TextView tvTituloMascotas = (TextView) findViewById(R.id.tvNombre);
+        registerForContextMenu(tvTituloMascotas);
 
         agregarFAB();
 
@@ -82,4 +92,45 @@ public class DetalleMascota extends AppCompatActivity {
             }
         });
     }
+
+    public void levantarMenuPopup(View v){
+        ImageView imagen = (ImageView) findViewById(R.id.imgImagen);
+        PopupMenu popupMenu = new PopupMenu(this, imagen);
+        popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.mpFavorito:
+                        Toast.makeText(getBaseContext(), "imagen", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.mpContacto:
+                        Toast.makeText(getBaseContext(), "detalle", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return true;
+            }
+        });
+        popupMenu.show();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.contexto, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.cmEdit:
+                Toast.makeText(this, "editando", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.cmDelete:
+                Toast.makeText(this, "borrando", Toast.LENGTH_LONG).show();
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
 }

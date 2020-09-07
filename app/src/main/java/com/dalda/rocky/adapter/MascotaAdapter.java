@@ -1,4 +1,4 @@
-package com.dalda.rocky;
+package com.dalda.rocky.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.dalda.rocky.pojo.Mascota;
+import com.dalda.rocky.R;
 
 import java.util.ArrayList;
 

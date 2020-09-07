@@ -1,4 +1,4 @@
-package com.dalda.rocky;
+package com.dalda.rocky.pojo;
 
 import java.io.Serializable;
 

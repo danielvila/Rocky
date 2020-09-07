@@ -29,6 +29,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></include>
+
+        <ImageView
+            android:id="@+id/imgImagen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icons8_bone_yelow_48"
+            android:onClick="levantarMenuPopup"/>
+
         <TextView
             android:id="@+id/tvNombre"
             android:layout_width="wrap_content"
