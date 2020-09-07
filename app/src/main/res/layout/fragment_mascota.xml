@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".fragment.MascotaFragment">
 
     <LinearLayout
@@ -16,49 +16,35 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/llsecundario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_horizontal">
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:src="@drawable/mascota4"
-            app:civ_border_color="#3f51b5"
+            app:civ_border_color="@color/colorAccent"
             app:civ_border_width="4dp"
             app:civ_shadow="true"
-            app:civ_shadow_color="#3f51b5"
+            app:civ_shadow_color="@color/colorAccent"
             app:civ_shadow_radius="10dp" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Lucifer"
-            android:textSize="@dimen/nombre_contacto"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llsecundario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llinicial">
+            android:textSize="@dimen/nombre_contacto"
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMascotas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

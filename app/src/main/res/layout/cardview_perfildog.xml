@@ -7,9 +7,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPerfilDog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
+        android:layout_width="100dp"
+        android:layout_height="145dp"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -26,20 +26,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/imgFotoCVM"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/mascota1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:gravity="center_horizontal">
 
                 <TextView
