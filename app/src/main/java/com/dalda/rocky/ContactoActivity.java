@@ -61,12 +61,14 @@ public class ContactoActivity extends AppCompatActivity {
 
         String emailBody = "Enviado por: " + nombre + ", Mensaje: " + msaje;
 
-        final String fromEmail ="info@agvideo.tv";
-        final String fromPassword = "r4lSkyBTbFmvOWT1";
-        final String emailPort = "465";
+        /*start configuration agregar los datos para el envio de correo*/
+        final String fromEmail ="";/*cuenta de correo que hara el envio ejem: micuenta@gmail.com*/
+        final String fromPassword = "";/*pasword dela cuenta*/
+        final String emailPort = "";/*puerto smtp que use la cuenta, ejem: 587*/
         final String smtpAuth = "true";
         final String starttls = "true";
-        final String emailHost = "rcentral506.webserversystems.com";
+        final String emailHost = "";/*host para el envio por smtp, ejem: smtp.gmail.com*/
+        /*end configuration*/
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", smtpAuth);
