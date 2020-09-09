@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetalleContactoActivity">
+
+    <include
+        android:id="@+id/miActionBar"
+        layout="@layout/actionbar"
+        ></include>
+
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgDcFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="levantarMenuPopup"
+            android:src="@drawable/mascota4" />
+        <TextView
+            android:id="@+id/tvDcNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenidos"
+            android:textSize="@dimen/nombre_contacto"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/llPhone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="llamar"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgDcTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_telefono" />
+
+            <TextView
+                android:id="@+id/tvDcTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/left"
+                android:text="@string/telefono"
+                android:textSize="@dimen/telefono_contacto" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="enviarMail"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgDcEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_email" />
+
+            <TextView
+                android:id="@+id/tvDcEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/left"
+                android:text="@string/email" />
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_below="@id/llContent"
+            android:clickable="true"
+            android:focusable="true"
+            app:barrierAllowsGoneWidgets="false"
+            app:barrierDirection="bottom"
+            app:srcCompat="@drawable/icons8_star_48"
+            android:layout_gravity="right"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

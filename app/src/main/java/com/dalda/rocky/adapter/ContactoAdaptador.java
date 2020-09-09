@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dalda.rocky.DetalleContactoActivity;
 import com.dalda.rocky.pojo.Contacto;
 import com.dalda.rocky.DetalleMascota;
 import com.dalda.rocky.R;
@@ -47,7 +48,7 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
             @Override
             public void onClick(View view) {
                 Toast.makeText(activity, contacto.getNombre(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(activity, DetalleMascota.class);
+                Intent intent = new Intent(activity, DetalleContactoActivity.class);
                 contac = new Contacto( contacto.getNombre(), contacto.getTelefono(), contacto.getEmail(), contacto.getFoto());
                 intent.putExtra("mycontact", contac);
                 activity.startActivity(intent);

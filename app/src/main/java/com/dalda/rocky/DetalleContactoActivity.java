@@ -1,9 +1,12 @@
 package com.dalda.rocky;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -13,33 +16,28 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import com.dalda.rocky.pojo.Contacto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-public class DetalleMascota extends AppCompatActivity {
-    TextView tvNombre;
-    TextView tvTelefono;
-    TextView tvEmail;
+public class DetalleContactoActivity extends AppCompatActivity {
+
+    TextView tvDcNombre;
+    TextView tvDcTelefono;
+    TextView tvDcEmail;
+    ImageView imgDcFoto;
     public Contacto contact;
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.mascota_detalle);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detalle_contacto);
 
         Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
         setSupportActionBar(miActionBar);
-
-        TextView tvTituloMascotas = (TextView) findViewById(R.id.tvNombre);
-        registerForContextMenu(tvTituloMascotas);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         agregarFAB();
-
-       /* Toast.makeText(this, "estamos comenzando esta vista", Toast.LENGTH_LONG).show();
 
         Intent intent = getIntent();
         contact = (Contacto)intent.getSerializableExtra("mycontact");
@@ -47,42 +45,35 @@ public class DetalleMascota extends AppCompatActivity {
         String nombre   = contact.getNombre();
         String telefono = contact.getTelefono();
         String email    = contact.getEmail();
-        Toast.makeText(this, email + " aqui con el email", Toast.LENGTH_LONG).show();*/
-       /* tvNombre   = findViewById(R.id.tvNombre);
-        tvTelefono = findViewById(R.id.tvTelefono);
-        tvEmail    = findViewById(R.id.tvEmail);
 
-        tvNombre.setText(nombre);
-        tvTelefono.setText(telefono);
-        tvEmail.setText(email);*/
-/*
-        Log.i("Nombre: ", nombre);
-        Log.i("Telefono: ", telefono);
-        Log.i("Email: ", email);*/
-    }
+        tvDcNombre   = (TextView) findViewById(R.id.tvDcNombre);
+        tvDcTelefono = (TextView) findViewById(R.id.tvDcTelefono);
+        tvDcEmail    = (TextView) findViewById(R.id.tvDcEmail);
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK){
-            Intent intent = new Intent(DetalleMascota.this, ListadoMascotas.class);
-            startActivity(intent);
-        }
-        return super.onKeyDown(keyCode, event);
+        /*registramos la linea de abajo para el menu contextual*/
+        registerForContextMenu(tvDcNombre);
+
+        tvDcNombre.setText(nombre);
+        tvDcTelefono.setText(telefono);
+        tvDcEmail.setText(email);
+
     }
 
     public void llamar(View v){
-        String telefono = tvTelefono.getText().toString();
+        String telefono = tvDcTelefono.getText().toString();
         startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telefono)));
     }
 
     public void enviarMail(View v){
-        String email = tvEmail.getText().toString();
+        String email = tvDcEmail.getText().toString();
         Intent emailIntent = new Intent((Intent.ACTION_SEND));
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
         emailIntent.setType("message/rfc822");
         startActivity(Intent.createChooser(emailIntent, "Email "));
     }
+
+    /*boton flotante*/
     public void agregarFAB(){
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +84,9 @@ public class DetalleMascota extends AppCompatActivity {
         });
     }
 
+    /*metodo para el menupopup*/
     public void levantarMenuPopup(View v){
-        ImageView imagen = (ImageView) findViewById(R.id.imgImagen);
+        ImageView imagen = (ImageView) findViewById(R.id.imgDcFoto);
         PopupMenu popupMenu = new PopupMenu(this, imagen);
         popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -114,6 +106,7 @@ public class DetalleMascota extends AppCompatActivity {
         popupMenu.show();
     }
 
+    /** start metodos para el menu contextual*/
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -132,5 +125,13 @@ public class DetalleMascota extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
-
+    /** end metodos para el menu contextual*/
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            Intent intent = new Intent(DetalleContactoActivity.this, ListadoMascotas.class);
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

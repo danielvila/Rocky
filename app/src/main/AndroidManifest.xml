@@ -14,6 +14,12 @@
         android:roundIcon="@mipmap/rocky"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DetalleContactoActivity"
+            android:parentActivityName=".ListadoMascotas">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListadoMascotas" />
+        </activity>
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
@@ -46,10 +52,8 @@
         <activity android:name=".ListadoMascotas" />
         <activity
             android:name=".DetalleMascota"
-            android:parentActivityName=".ListadoMascotas">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListadoMascotas" />
+            >
+
         </activity>
     </application>
 
