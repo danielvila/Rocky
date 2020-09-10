@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dalda.rocky.DetalleContactoActivity;
 import com.dalda.rocky.pojo.Contacto;
-import com.dalda.rocky.DetalleMascota;
 import com.dalda.rocky.R;
 
 import java.util.ArrayList;
@@ -44,12 +43,13 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
         holder.imgFoto.setImageResource(contacto.getFoto());
         holder.tvNombreCV.setText(contacto.getNombre());
         holder.tvTelefonoCV.setText(contacto.getTelefono());
+        holder.tvLikes.setText(String.valueOf(contacto.getLikes()) + " Likes");
         holder.imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(activity, contacto.getNombre(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity, DetalleContactoActivity.class);
-                contac = new Contacto( contacto.getNombre(), contacto.getTelefono(), contacto.getEmail(), contacto.getFoto());
+                contac = new Contacto( contacto.getNombre(), contacto.getTelefono(), contacto.getEmail(), contacto.getFoto(), contacto.getLikes());
                 intent.putExtra("mycontact", contac);
                 activity.startActivity(intent);
             }
@@ -73,6 +73,7 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
         private TextView tvNombreCV;
         private TextView tvTelefonoCV;
         private ImageButton btnLike;
+        private TextView tvLikes;
 
         public ContactoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +81,7 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
             tvNombreCV      = (TextView) itemView.findViewById(R.id.tvNombreCV);
             tvTelefonoCV    = (TextView) itemView.findViewById(R.id.tvTelefonoCV);
             btnLike         = (ImageButton) itemView.findViewById(R.id.btnLike);
+            tvLikes         = (TextView) itemView.findViewById(R.id.tvLikesCV);
         }
     }
 }

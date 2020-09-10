@@ -3,8 +3,6 @@ package com.dalda.rocky;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.widget.Toolbar;
 
@@ -13,11 +11,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.dalda.rocky.adapter.ContactoAdaptador;
 import com.dalda.rocky.adapter.PageAdapter;
 import com.dalda.rocky.fragment.PerfilFragment;
 import com.dalda.rocky.fragment.RecyclerViewFragment;
-import com.dalda.rocky.pojo.Contacto;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

@@ -1,33 +1,21 @@
 package com.dalda.rocky;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.dalda.rocky.adapter.MascotaAdapter;
 import com.dalda.rocky.adapter.PageAdapter;
 import com.dalda.rocky.fragment.MacotasFragment;
 import com.dalda.rocky.fragment.MascotaFragment;
-import com.dalda.rocky.fragment.PerfilFragment;
-import com.dalda.rocky.fragment.RecyclerViewFragment;
 import com.dalda.rocky.pojo.Mascota;
 import com.google.android.material.tabs.TabLayout;
 
