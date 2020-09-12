@@ -3,6 +3,7 @@ package com.dalda.rocky.pojo;
 import java.io.Serializable;
 
 public class Mascota implements Serializable {
+    private int id;
     private String nombre;
     private int rating;
     private int foto;
@@ -11,6 +12,16 @@ public class Mascota implements Serializable {
         this.nombre = nombre;
         this.rating = rating;
         this.foto = foto;
+    }
+
+    public Mascota() { }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

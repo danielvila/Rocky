@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dalda.rocky.db.ConstructorMascotas;
 import com.dalda.rocky.pojo.Mascota;
 import com.dalda.rocky.R;
 
@@ -21,7 +22,6 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MascotaV
 
     ArrayList<Mascota> mascotas;
     Activity activity;
-    public Mascota mascota;
 
     public MascotaAdapter(ArrayList<Mascota> mascotas, Activity activity) {
         this.mascotas = mascotas;
@@ -37,17 +37,20 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MascotaV
 
     @Override
     public void onBindViewHolder(@NonNull final MascotaViewHolder holder, int position) {
-        final Mascota mascotao = mascotas.get(position);
-        holder.imgFoto.setImageResource(mascotao.getFoto());
-        holder.tvNombreCV.setText(mascotao.getNombre());
-        holder.tvRating.setText(mascotao.getRating() + "");
+        final Mascota mascota = mascotas.get(position);
+        holder.imgFoto.setImageResource(mascota.getFoto());
+        holder.tvNombreCV.setText(mascota.getNombre());
+        holder.tvRating.setText(mascota.getRating() + "");
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int rating = mascotao.getRating();
-                mascotao.setRating( ++rating);
-                holder.tvRating.setText(String.valueOf(rating));
-                Toast.makeText(activity, "Diste like a " + mascotao.getNombre() + "Rating: " + mascotao.getRating(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Diste like a " + mascota.getNombre() , Toast.LENGTH_SHORT).show();
+
+                ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
+                constructorMascotas.ratingMascota(mascota);
+
+                holder.tvRating.setText(String.valueOf(constructorMascotas.obtenerRating(mascota)));
+
             }
         });
     }
