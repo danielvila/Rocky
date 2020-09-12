@@ -63,4 +63,9 @@ public class ConstructorMascotas {
         DbMascotas db = new DbMascotas(context);
         return db.obtenerRating(mascota);
     }
+
+    public ArrayList<Mascota> obtenerFavoritos(){
+        DbMascotas db = new DbMascotas(context);
+        return db.obtenerMascotasFavoritas();
+    }
 }

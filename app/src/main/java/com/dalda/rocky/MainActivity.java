@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.mFavorito:
                 Intent intent = new Intent(MainActivity.this, ListaFavoritos.class);
-                intent.putExtra("mymascotas", mascotas);
                 startActivity(intent);
                 finish();
                 break;

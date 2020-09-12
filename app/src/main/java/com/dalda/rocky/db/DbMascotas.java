@@ -101,4 +101,37 @@ public class DbMascotas extends SQLiteOpenHelper {
         db.close();
         return rating;
     }
+
+    public ArrayList<Mascota> obtenerMascotasFavoritas(){
+        ArrayList<Mascota> mascotas = new ArrayList<>();
+
+        String subquery = "SELECT " + ConstantesDbMacota.TABLE_RATING_ID_MASCOTA + " FROM " + ConstantesDbMacota.TABLE_RATING;
+        String query = "SELECT * FROM " + ConstantesDbMacota.TABLE_MASCOTA +
+                        " WHERE " + ConstantesDbMacota.TABLE_MASCOTA_ID + " IN ( " + subquery + " )";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor registros = db.rawQuery(query, null);
+
+        while (registros.moveToNext()){
+            Mascota mascotaActual = new Mascota();
+            mascotaActual.setId(registros.getInt(0));
+            mascotaActual.setNombre(registros.getString(1));
+            mascotaActual.setFoto(registros.getInt(2));
+
+            String queryrating = "SELECT COUNT(" +   ConstantesDbMacota.TABLE_RATING_CANTIDAD + ") as rating FROM " +  ConstantesDbMacota.TABLE_RATING +
+                    " WHERE " +  ConstantesDbMacota.TABLE_RATING_ID_MASCOTA + "=" + mascotaActual.getId();
+            Cursor registrosRating = db.rawQuery(queryrating, null);
+            if (registrosRating.moveToNext()){
+                mascotaActual.setRating(registrosRating.getInt(0));
+            }else{
+                mascotaActual.setRating(0);
+            }
+
+            mascotas.add(mascotaActual);
+        }
+
+        db.close();
+
+        return mascotas;
+    }
 }

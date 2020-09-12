@@ -5,20 +5,25 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
 import com.dalda.rocky.adapter.MascotaAdapter;
+import com.dalda.rocky.fragment.IMascotasFragment;
 import com.dalda.rocky.pojo.Mascota;
+import com.dalda.rocky.presentador.IMascotasFragmentPresenter;
+import com.dalda.rocky.presentador.MascotasFragmentPresenter;
 
 import java.util.ArrayList;
 
-public class ListaFavoritos extends AppCompatActivity {
+public class ListaFavoritos extends AppCompatActivity implements IMascotasFragment {
 
     ArrayList<Mascota> mascotas;
     private RecyclerView listafavoritos;
-    public MascotaAdapter adapter;
+    private IMascotasFragmentPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,29 +34,7 @@ public class ListaFavoritos extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listafavoritos = (RecyclerView) findViewById(R.id.rvMascotasfav);
-        LinearLayoutManager llmfavoritos = new LinearLayoutManager(this);
-        llmfavoritos.setOrientation(LinearLayoutManager.VERTICAL);
-        listafavoritos.setLayoutManager(llmfavoritos);
-
-        Intent intent = getIntent();
-        mascotas = (ArrayList<Mascota>) intent.getSerializableExtra("mymascotas");
-        if (mascotas == null){
-            iniciarListaMascotas();
-        }
-        iniciarAdaptador();
-    }
-    public void iniciarAdaptador(){
-        adapter = new MascotaAdapter(mascotas, this);
-        listafavoritos.setAdapter(adapter);
-    }
-
-    public void iniciarListaMascotas(){
-        mascotas = new ArrayList<Mascota>();
-        mascotas.add(new Mascota("Zepellin", 2, R.drawable.mascota1));
-        mascotas.add(new Mascota("Lucifer", 4, R.drawable.mascota2));
-        mascotas.add(new Mascota("Rocky", 5, R.drawable.mascota3));
-        mascotas.add(new Mascota("Yeico", 1, R.drawable.mascota4));
-        mascotas.add(new Mascota("Duran", 3, R.drawable.mascota5));
+        presenter = new MascotasFragmentPresenter(this, getApplicationContext());
     }
 
     @Override
@@ -61,5 +44,23 @@ public class ListaFavoritos extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void generarLinearLayoutVertical() {
+        LinearLayoutManager llmfavoritos = new LinearLayoutManager(this);
+        llmfavoritos.setOrientation(LinearLayoutManager.VERTICAL);
+        listafavoritos.setLayoutManager(llmfavoritos);
+    }
+
+    @Override
+    public MascotaAdapter crearAdaptador(ArrayList<Mascota> mascotas) {
+        MascotaAdapter adapter = new MascotaAdapter(mascotas, this);
+        return adapter;
+    }
+
+    @Override
+    public void iniciarAdaptadorRV(MascotaAdapter adapter) {
+        listafavoritos.setAdapter(adapter);
     }
 }
